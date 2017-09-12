@@ -2,6 +2,7 @@ package net.jasin.eliza.beritaboard;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -10,10 +11,15 @@ import android.widget.Toast;
 
 public class Home extends AppCompatActivity {
 
+    private RecyclerView recyclerView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        recyclerView = (RecyclerView) findViewById(R.id.recyclerv_sources);
+        
     }
 
     @Override
