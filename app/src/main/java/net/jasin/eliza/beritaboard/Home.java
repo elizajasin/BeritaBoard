@@ -2,6 +2,7 @@ package net.jasin.eliza.beritaboard;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
@@ -26,7 +27,7 @@ public class Home extends AppCompatActivity {
         recyclerView = (RecyclerView) findViewById(R.id.recyclerv_sources);
         adapterSources = new AdapterSources(this,getData());
         recyclerView.setAdapter(adapterSources);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setLayoutManager(new GridLayoutManager(this,2));
     }
 
     public static List<NewsSources> getData(){

@@ -17,8 +17,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Home"
-            android:label="Home"></activity>
+        <activity
+            android:name=".Home"
+            android:label="News Sources" />
+        <activity android:name=".SourceList"></activity>
     </application>
 
 </manifest>
