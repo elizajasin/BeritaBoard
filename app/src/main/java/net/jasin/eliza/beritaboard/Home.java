@@ -18,6 +18,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import net.jasin.eliza.beritaboard.network.VolleySingleton;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,7 +33,7 @@ public class Home extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        RequestQueue queue = Volley.newRequestQueue(this);
+        RequestQueue queue = VolleySingleton.getsInstance().getmRequestQueue();
         StringRequest request = new StringRequest(Request.Method.GET, "https://newsapi.org/", new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -44,7 +46,7 @@ public class Home extends AppCompatActivity {
             }
         });
         queue.add(request);
-        
+
         recyclerView = (RecyclerView) findViewById(R.id.recyclerv_sources);
         adapterSources = new AdapterSources(this,getData());
         recyclerView.setAdapter(adapterSources);
