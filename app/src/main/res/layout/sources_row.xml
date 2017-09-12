@@ -9,11 +9,27 @@
         android:layout_height="100dp"
         android:src="@drawable/logo_bb"/>
 
-    <TextView
-        android:id="@+id/text_sources"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="vertical"
         android:layout_gravity="center_vertical"
-        android:layout_weight="1"
-        android:text="Dummy Source"/>
+        android:layout_weight="1">
+
+        <TextView
+            android:id="@+id/text_sources"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Title"
+            android:textSize="18sp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/text_category"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Category"
+            android:textSize="14sp"/>
+
+    </LinearLayout>
 </LinearLayout>

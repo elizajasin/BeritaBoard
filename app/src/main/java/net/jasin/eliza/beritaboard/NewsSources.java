@@ -8,4 +8,5 @@ public class NewsSources {
 
     int iconId;
     String title;
+    String category;
 }

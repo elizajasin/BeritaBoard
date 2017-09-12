@@ -1,6 +1,5 @@
 package net.jasin.eliza.beritaboard;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
@@ -41,6 +40,7 @@ public class AdapterSources extends RecyclerView.Adapter<AdapterSources.MyViewHo
         NewsSources current = data.get(position);
         holder.title.setText(current.title);
         holder.icon.setImageResource(current.iconId);
+        holder.category.setText(current.category);
     }
 
     @Override
@@ -50,12 +50,14 @@ public class AdapterSources extends RecyclerView.Adapter<AdapterSources.MyViewHo
 
     class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView title;
+        TextView category;
         ImageView icon;
         public MyViewHolder(View itemView) {
             super(itemView);
             itemView.setOnClickListener(this);
             title = (TextView) itemView.findViewById(R.id.text_sources);
             icon = (ImageView) itemView.findViewById(R.id.image_sources);
+            category = (TextView) itemView.findViewById(R.id.text_category);
         }
 
         @Override
