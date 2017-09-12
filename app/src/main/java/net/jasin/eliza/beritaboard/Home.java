@@ -2,6 +2,7 @@ package net.jasin.eliza.beritaboard;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
 import android.view.Menu;
@@ -9,9 +10,13 @@ import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Home extends AppCompatActivity {
 
     private RecyclerView recyclerView;
+    private AdapterSources adapterSources;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,7 +24,23 @@ public class Home extends AppCompatActivity {
         setContentView(R.layout.activity_home);
 
         recyclerView = (RecyclerView) findViewById(R.id.recyclerv_sources);
-        
+        adapterSources = new AdapterSources(this,getData());
+        recyclerView.setAdapter(adapterSources);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+    }
+
+    public static List<NewsSources> getData(){
+        List<NewsSources> data = new ArrayList<>();
+        int[] icons = {R.drawable.logo_bb,R.drawable.logo_bb,R.drawable.logo_bb,R.drawable.logo_bb,R.drawable.logo_bb,R.drawable.logo_bb,R.drawable.logo_bb,R.drawable.logo_bb,R.drawable.logo_bb};
+        String[] titles = {"Eliza", "Riviera", "Rachmawati","Eliza", "Riviera", "Rachmawati","Eliza", "Riviera", "Rachmawati"};
+
+        for (int i = 0; i < titles.length && i < icons.length; i++){
+            NewsSources current = new NewsSources();
+            current.iconId = icons[i];
+            current.title = titles[i];
+            data.add(current);
+        }
+        return data;
     }
 
     @Override
