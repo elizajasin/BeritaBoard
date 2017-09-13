@@ -49,12 +49,12 @@ public class Home extends AppCompatActivity {
         volleySingleton = VolleySingleton.getsInstance();
         requestQueue = volleySingleton.getRequestQueue();
 
+        sendJsonRequest();
+
         recyclerView = (RecyclerView) findViewById(R.id.recyclerv_sources);
-        recyclerView.setLayoutManager(new GridLayoutManager(this,2));
         adapterSources = new AdapterSources(this);
         recyclerView.setAdapter(adapterSources);
-
-        sendJsonRequest();
+        recyclerView.setLayoutManager(new GridLayoutManager(this,2));
     }
 
     private void sendJsonRequest(){
@@ -64,7 +64,8 @@ public class Home extends AppCompatActivity {
                 Log.d(TAG, "Url : " + getRequestUrl());
                 lisSources = parseJSONResponse(response);
                 adapterSources.setListSources(lisSources);
-                Log.d(TAG, "List source : " + getRequestUrl());
+                Log.d(TAG, "List source : " + lisSources.toString());
+                Log.d(TAG, "Lenght source : " + lisSources.size());
             }
         }, new Response.ErrorListener() {
             @Override
@@ -76,7 +77,7 @@ public class Home extends AppCompatActivity {
     }
 
     private ArrayList<NewsSources> parseJSONResponse(JSONObject response){
-        ArrayList<NewsSources> listSources = new ArrayList<>();
+        ArrayList<NewsSources> listMedia = new ArrayList<>();
         if (response != null || response.length() > 0){
             try {
                 JSONArray arraySource = response.getJSONArray(Keys.EndPointNews.KEY_SOURCES);
@@ -94,7 +95,8 @@ public class Home extends AppCompatActivity {
                     sources.setName(name);
                     sources.setCategory(category);
                     sources.setDescription(description);
-                    lisSources.add(sources);
+                    Log.d(TAG, "Get source : " + sources.getName());
+                    listMedia.add(sources);
                 }
             } catch (JSONException e){
 
@@ -102,7 +104,7 @@ public class Home extends AppCompatActivity {
 
             }
         }
-        return listSources;
+        return listMedia;
     }
 
     public static String getRequestUrl(){
