@@ -50,6 +50,7 @@ public class AdapterSources extends RecyclerView.Adapter<AdapterSources.MyViewHo
         holder.title.setText(currentSource.getName());
         holder.category.setText(currentSource.getCategory());
         holder.description.setText(currentSource.getDescription());
+        holder.id = listSources.get(position).getId();
     }
 
     @Override
@@ -61,6 +62,7 @@ public class AdapterSources extends RecyclerView.Adapter<AdapterSources.MyViewHo
         private TextView title;
         private TextView category;
         private TextView description;
+        private String id;
 
         public MyViewHolder(View itemView) {
             super(itemView);
@@ -72,7 +74,9 @@ public class AdapterSources extends RecyclerView.Adapter<AdapterSources.MyViewHo
 
         @Override
         public void onClick(View view) {
-            context.startActivity(new Intent(context, SourceList.class));
+            Intent intent = new Intent(context, SourceList.class);
+            intent.putExtra("id", id);
+            context.startActivity(intent);
         }
     }
 }

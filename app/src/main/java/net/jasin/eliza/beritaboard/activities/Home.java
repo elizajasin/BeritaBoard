@@ -86,11 +86,13 @@ public class Home extends AppCompatActivity {
                 JSONArray arraySource = response.getJSONArray(KEY_SOURCES);
                 for (int i = 0; i < arraySource.length(); i++){
                     JSONObject currentSource = arraySource.getJSONObject(i);
+                    String id = currentSource.getString(KEY_ID);
                     String name = currentSource.getString(KEY_NAME);
                     String category = currentSource.getString(KEY_CATEGORY);
                     String description = currentSource.getString(KEY_DESCRIPTION);
 
                     NewsSources sources = new NewsSources();
+                    sources.setId(id);
                     sources.setName(name);
                     sources.setCategory(category);
                     sources.setDescription(description);

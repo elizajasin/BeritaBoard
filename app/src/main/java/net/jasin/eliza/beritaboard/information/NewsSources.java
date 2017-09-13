@@ -6,6 +6,7 @@ package net.jasin.eliza.beritaboard.information;
 
 public class NewsSources {
 
+    private String id;
     private String name;
     private String category;
     private String description;
@@ -14,10 +15,18 @@ public class NewsSources {
 
     }
 
-    public NewsSources(String title, String category, String description){
+    public NewsSources(String id, String title, String category, String description){
         this.name = title;
         this.category = category;
         this.description = description;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public void setName(String name) {

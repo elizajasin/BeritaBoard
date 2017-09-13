@@ -47,7 +47,7 @@ public class SourceList extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_source_list);
-
+        
         volleySingleton = VolleySingleton.getsInstance();
         requestQueue = volleySingleton.getRequestQueue();
 
@@ -60,10 +60,10 @@ public class SourceList extends AppCompatActivity {
     }
 
     private void sendJsonRequest(){
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, getRequestUrl(), new Response.Listener<JSONObject>() {
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, getRequestUrl(getIntent().getStringExtra("id")), new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                Log.d(TAG, "Url : " + getRequestUrl());
+                Log.d(TAG, "Url : " + getRequestUrl(getIntent().getStringExtra("id")));
                 listArticles = parseJSONResponse(response);
                 adapterArticles.setListArticles(listArticles);
                 Log.d(TAG, "List source : " + listArticles.toString());
@@ -102,8 +102,8 @@ public class SourceList extends AppCompatActivity {
         return listMedia;
     }
 
-    public static String getRequestUrl(){
-        return URL_ARTICLES+URL_CHAR_QUESTION+URL_PARAM_SOURCE+"the-next-web"+URL_CHAR_AMEPERSAND+URL_PARAM_SORT_BY+MyApplication.LATEST+URL_CHAR_AMEPERSAND+URL_PARAM_API_KEY+MyApplication.API_KEY;
+    public static String getRequestUrl(String id){
+        return URL_ARTICLES+URL_CHAR_QUESTION+URL_PARAM_SOURCE+id+URL_CHAR_AMEPERSAND+URL_PARAM_SORT_BY+MyApplication.LATEST+URL_CHAR_AMEPERSAND+URL_PARAM_API_KEY+MyApplication.API_KEY;
     }
 
     @Override
