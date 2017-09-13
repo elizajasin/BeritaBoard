@@ -9,6 +9,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import net.jasin.eliza.beritaboard.network.VolleySingleton;
+
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -18,14 +21,18 @@ import java.util.List;
 
 public class AdapterSources extends RecyclerView.Adapter<AdapterSources.MyViewHolder>{
 
+    private VolleySingleton volleySingleton;
+    private ArrayList<NewsSources> listSources = new ArrayList<>();
     private LayoutInflater inflater;
-    List<NewsSources> data = Collections.emptyList();
-    private Context context;
 
-    public AdapterSources(Context context, List<NewsSources> data){
-        this.context = context;
+    public AdapterSources(Context context){
         inflater = LayoutInflater.from(context);
-        this.data = data;
+        volleySingleton = VolleySingleton.getsInstance();
+    }
+
+    public void setListSources(ArrayList<NewsSources> listSources){
+        this.listSources = listSources;
+        notifyItemChanged(0, listSources.size());
     }
 
     @Override
@@ -37,32 +44,33 @@ public class AdapterSources extends RecyclerView.Adapter<AdapterSources.MyViewHo
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        NewsSources current = data.get(position);
-        holder.title.setText(current.title);
-        holder.icon.setImageResource(current.iconId);
-        holder.category.setText(current.category);
+        NewsSources currentSource = listSources.get(position);
+        holder.title.setText(currentSource.getName());
+        holder.category.setText(currentSource.getCategory());
+        holder.description.setText(currentSource.getDescription());
     }
 
     @Override
     public int getItemCount() {
-        return data.size();
+        return listSources.size();
     }
 
-    class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        TextView title;
-        TextView category;
-        ImageView icon;
+    class MyViewHolder extends RecyclerView.ViewHolder{
+        private TextView title;
+        private TextView category;
+        private TextView description;
+
         public MyViewHolder(View itemView) {
             super(itemView);
-            itemView.setOnClickListener(this);
+//            itemView.setOnClickListener(this);
             title = (TextView) itemView.findViewById(R.id.text_sources);
-            icon = (ImageView) itemView.findViewById(R.id.image_sources);
             category = (TextView) itemView.findViewById(R.id.text_category);
+            description = (TextView) itemView.findViewById(R.id.text_desc);
         }
 
-        @Override
-        public void onClick(View view) {
-            context.startActivity(new Intent(context, SourceList.class));
-        }
+//        @Override
+//        public void onClick(View view) {
+//            context.startActivity(new Intent(context, SourceList.class));
+//        }
     }
 }
