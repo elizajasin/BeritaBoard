@@ -11,45 +11,32 @@
         android:layout_height="150dp"
         android:layout_margin="5dp"
         android:padding="10dp"
+        android:backgroundTint="@color/colorAccent"
         card_view:cardCornerRadius="6dp">
-
-        <FrameLayout
-            android:background="@color/colorAccent"
-            android:layout_width="4dp"
-            android:layout_height="match_parent"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
+            android:orientation="horizontal"
             android:layout_gravity="center_vertical"
             android:padding="10dp">
 
+            <ImageView
+                android:id="@+id/img_article"
+                android:layout_width="150dp"
+                android:layout_height="130dp" />
+
             <TextView
-                android:id="@+id/text_sources"
+                android:id="@+id/text_article"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
                 android:text="Title"
+                android:layout_weight="1"
                 android:textAlignment="center"
-                android:textSize="20sp"
+                android:textSize="18sp"
+                android:textColor="#ffff"
                 android:textStyle="bold"/>
-
-            <TextView
-                android:id="@+id/text_category"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textAlignment="center"
-                android:text="Category"
-                android:textSize="16sp"
-                android:layout_margin="4dp"/>
-
-            <TextView
-                android:id="@+id/text_desc"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textAlignment="center"
-                android:text="Description"
-                android:textSize="12sp"/>
 
         </LinearLayout>
     </android.support.v7.widget.CardView>

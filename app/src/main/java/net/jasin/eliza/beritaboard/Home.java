@@ -87,15 +87,10 @@ public class Home extends AppCompatActivity {
                     String category = currentSource.getString("category");
                     String description = currentSource.getString("description");
 
-                    Log.d(TAG, "Name : " + name);
-                    Log.d(TAG, "Category : " + category);
-                    Log.d(TAG, "Description : " + description);
-
                     NewsSources sources = new NewsSources();
                     sources.setName(name);
                     sources.setCategory(category);
                     sources.setDescription(description);
-                    Log.d(TAG, "Get source : " + sources.getName());
                     listMedia.add(sources);
                 }
             } catch (JSONException e){

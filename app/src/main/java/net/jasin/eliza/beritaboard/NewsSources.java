@@ -6,9 +6,6 @@ package net.jasin.eliza.beritaboard;
 
 public class NewsSources {
 
-//    int iconId;
-//    String title;
-//    String category;
     private String name;
     private String category;
     private String description;

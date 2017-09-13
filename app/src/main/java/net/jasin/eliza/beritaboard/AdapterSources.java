@@ -70,6 +70,8 @@ public class AdapterSources extends RecyclerView.Adapter<AdapterSources.MyViewHo
 
 //        @Override
 //        public void onClick(View view) {
+//
+//            view.getContext().startActivity(i);
 //            context.startActivity(new Intent(context, SourceList.class));
 //        }
     }
