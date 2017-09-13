@@ -7,5 +7,6 @@ package net.jasin.eliza.beritaboard.network;
 public interface Keys {
     public interface EndPointNews{
         public static final String KEY_SOURCES="sources";
+        public static final String KEY_ARTICLES="articles";
     }
 }

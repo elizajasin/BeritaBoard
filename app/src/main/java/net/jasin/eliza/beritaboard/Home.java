@@ -27,7 +27,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Home extends AppCompatActivity {
 
@@ -37,7 +36,6 @@ public class Home extends AppCompatActivity {
     private final String TAG = "Home";
 
     private VolleySingleton volleySingleton;
-    private ImageLoader imageLoader;
     private RequestQueue requestQueue;
     private ArrayList<NewsSources> lisSources = new ArrayList<>();
 
