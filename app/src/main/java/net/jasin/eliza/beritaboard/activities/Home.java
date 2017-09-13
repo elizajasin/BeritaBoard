@@ -30,7 +30,8 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-import static net.jasin.eliza.beritaboard.network.Keys.EndPointNews.*;
+import static net.jasin.eliza.beritaboard.information.Keys.EndPointNews.*;
+import static net.jasin.eliza.beritaboard.information.UrlEndPoints.*;
 
 public class Home extends AppCompatActivity {
 
@@ -105,23 +106,8 @@ public class Home extends AppCompatActivity {
     }
 
     public static String getRequestUrl(){
-        return "https://newsapi.org/v1/sources?language=en&apiKey="+ MyApplication.API_KEY;
+        return URL_SOURCES+URL_CHAR_QUESTION+URL_PARAM_LANGUAGE+MyApplication.LANG+URL_CHAR_AMEPERSAND+URL_PARAM_API_KEY+MyApplication.API_KEY;
     }
-
-//    public static List<NewsSources> getData(){
-//        List<NewsSources> data = new ArrayList<>();
-//        int[] icons = {R.drawable.logo_bb,R.drawable.logo_bb,R.drawable.logo_bb,R.drawable.logo_bb,R.drawable.logo_bb,R.drawable.logo_bb,R.drawable.logo_bb,R.drawable.logo_bb,R.drawable.logo_bb};
-//        String[] titles = {"Eliza", "Riviera", "Rachmawati","Eliza", "Riviera", "Rachmawati","Eliza", "Riviera", "Rachmawati"};
-//
-//        for (int i = 0; i < titles.length && i < icons.length; i++){
-//            NewsSources current = new NewsSources();
-//            current.iconId = icons[i];
-//            current.title = titles[i];
-//            current.category = titles[i];
-//            data.add(current);
-//        }
-//        return data;
-//    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

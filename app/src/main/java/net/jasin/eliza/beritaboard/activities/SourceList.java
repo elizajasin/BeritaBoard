@@ -30,7 +30,8 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-import static net.jasin.eliza.beritaboard.network.Keys.EndPointNews.*;
+import static net.jasin.eliza.beritaboard.information.Keys.EndPointNews.*;
+import static net.jasin.eliza.beritaboard.information.UrlEndPoints.*;
 
 public class SourceList extends AppCompatActivity {
     private RecyclerView recyclerView;
@@ -102,7 +103,7 @@ public class SourceList extends AppCompatActivity {
     }
 
     public static String getRequestUrl(){
-        return "https://newsapi.org/v1/articles?source=the-next-web&sortBy=latest&apiKey="+ MyApplication.API_KEY;
+        return URL_ARTICLES+URL_CHAR_QUESTION+URL_PARAM_SOURCE+"the-next-web"+URL_CHAR_AMEPERSAND+URL_PARAM_SORT_BY+MyApplication.LATEST+URL_CHAR_AMEPERSAND+URL_PARAM_API_KEY+MyApplication.API_KEY;
     }
 
     @Override

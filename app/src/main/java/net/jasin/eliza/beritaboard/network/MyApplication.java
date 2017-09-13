@@ -10,6 +10,8 @@ import android.content.Context;
 public class MyApplication extends Application {
 
     public static final String API_KEY = "fa055fcd23e44398b97ca647ed234c5f";
+    public static final String LANG = "en";
+    public static final String LATEST = "latest";
     private static MyApplication sInstance;
 
     @Override
