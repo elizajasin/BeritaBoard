@@ -1,4 +1,4 @@
-package net.jasin.eliza.beritaboard;
+package net.jasin.eliza.beritaboard.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -11,6 +11,8 @@ import android.widget.TextView;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
 
+import net.jasin.eliza.beritaboard.information.NewsArticles;
+import net.jasin.eliza.beritaboard.R;
 import net.jasin.eliza.beritaboard.network.VolleySingleton;
 
 import java.util.ArrayList;

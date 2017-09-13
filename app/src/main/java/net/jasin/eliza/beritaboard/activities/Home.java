@@ -1,4 +1,4 @@
-package net.jasin.eliza.beritaboard;
+package net.jasin.eliza.beritaboard.activities;
 
 import android.net.ParseException;
 import android.support.v7.app.AppCompatActivity;
@@ -16,10 +16,12 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.JsonObjectRequest;
 
-import net.jasin.eliza.beritaboard.network.Keys;
+import net.jasin.eliza.beritaboard.R;
+import net.jasin.eliza.beritaboard.adapter.AdapterSources;
+import net.jasin.eliza.beritaboard.information.NewsSources;
+import net.jasin.eliza.beritaboard.network.MyApplication;
 import net.jasin.eliza.beritaboard.network.VolleySingleton;
 
 import org.json.JSONArray;
@@ -27,6 +29,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+
+import static net.jasin.eliza.beritaboard.network.Keys.EndPointNews.*;
 
 public class Home extends AppCompatActivity {
 
@@ -78,12 +82,12 @@ public class Home extends AppCompatActivity {
         ArrayList<NewsSources> listMedia = new ArrayList<>();
         if (response != null || response.length() > 0){
             try {
-                JSONArray arraySource = response.getJSONArray(Keys.EndPointNews.KEY_SOURCES);
+                JSONArray arraySource = response.getJSONArray(KEY_SOURCES);
                 for (int i = 0; i < arraySource.length(); i++){
                     JSONObject currentSource = arraySource.getJSONObject(i);
-                    String name = currentSource.getString("name");
-                    String category = currentSource.getString("category");
-                    String description = currentSource.getString("description");
+                    String name = currentSource.getString(KEY_NAME);
+                    String category = currentSource.getString(KEY_CATEGORY);
+                    String description = currentSource.getString(KEY_DESCRIPTION);
 
                     NewsSources sources = new NewsSources();
                     sources.setName(name);
@@ -101,7 +105,7 @@ public class Home extends AppCompatActivity {
     }
 
     public static String getRequestUrl(){
-        return "https://newsapi.org/v1/sources?language=en&apiKey="+MyApplication.API_KEY;
+        return "https://newsapi.org/v1/sources?language=en&apiKey="+ MyApplication.API_KEY;
     }
 
 //    public static List<NewsSources> getData(){

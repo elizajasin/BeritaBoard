@@ -1,9 +1,8 @@
-package net.jasin.eliza.beritaboard;
+package net.jasin.eliza.beritaboard.activities;
 
 import android.net.ParseException;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -19,7 +18,10 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 
-import net.jasin.eliza.beritaboard.network.Keys;
+import net.jasin.eliza.beritaboard.R;
+import net.jasin.eliza.beritaboard.adapter.AdapterArticles;
+import net.jasin.eliza.beritaboard.information.NewsArticles;
+import net.jasin.eliza.beritaboard.network.MyApplication;
 import net.jasin.eliza.beritaboard.network.VolleySingleton;
 
 import org.json.JSONArray;
@@ -27,6 +29,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+
+import static net.jasin.eliza.beritaboard.network.Keys.EndPointNews.*;
 
 public class SourceList extends AppCompatActivity {
     private RecyclerView recyclerView;
@@ -77,11 +81,11 @@ public class SourceList extends AppCompatActivity {
         ArrayList<NewsArticles> listMedia = new ArrayList<>();
         if (response != null || response.length() > 0){
             try {
-                JSONArray arrayArticles = response.getJSONArray(Keys.EndPointNews.KEY_ARTICLES);
+                JSONArray arrayArticles = response.getJSONArray(KEY_ARTICLES);
                 for (int i = 0; i < arrayArticles.length(); i++){
                     JSONObject currentSource = arrayArticles.getJSONObject(i);
-                    String title = currentSource.getString("title");
-                    String image = currentSource.getString("urlToImage");
+                    String title = currentSource.getString(KEY_TITLE);
+                    String image = currentSource.getString(KEY_IMAGE);
 
                     NewsArticles article = new NewsArticles();
                     article.setTitle(title);
@@ -98,7 +102,7 @@ public class SourceList extends AppCompatActivity {
     }
 
     public static String getRequestUrl(){
-        return "https://newsapi.org/v1/articles?source=the-next-web&sortBy=latest&apiKey="+MyApplication.API_KEY;
+        return "https://newsapi.org/v1/articles?source=the-next-web&sortBy=latest&apiKey="+ MyApplication.API_KEY;
     }
 
     @Override

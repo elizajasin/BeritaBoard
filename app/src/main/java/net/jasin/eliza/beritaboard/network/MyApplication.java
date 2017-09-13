@@ -1,4 +1,4 @@
-package net.jasin.eliza.beritaboard;
+package net.jasin.eliza.beritaboard.network;
 
 import android.app.Application;
 import android.content.Context;

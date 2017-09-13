@@ -1,4 +1,4 @@
-package net.jasin.eliza.beritaboard;
+package net.jasin.eliza.beritaboard.activities;
 
 import android.content.Intent;
 import android.os.Handler;
@@ -6,10 +6,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
 
+import net.jasin.eliza.beritaboard.R;
+
 public class SplashScreen extends AppCompatActivity {
 
     private final int SPLASH_DISPLAY_LENGTH = 3000;
-    TextView tittle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

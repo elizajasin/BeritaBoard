@@ -1,4 +1,4 @@
-package net.jasin.eliza.beritaboard;
+package net.jasin.eliza.beritaboard.extras;
 
 import android.content.Context;
 import android.util.Log;

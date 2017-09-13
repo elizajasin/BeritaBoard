@@ -1,4 +1,4 @@
-package net.jasin.eliza.beritaboard;
+package net.jasin.eliza.beritaboard.information;
 
 /**
  * Created by elizajasin on 12/09/2017.

@@ -7,8 +7,6 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.Volley;
 
-import net.jasin.eliza.beritaboard.MyApplication;
-
 /**
  * Created by elizajasin on 12/09/2017.
  */

@@ -8,5 +8,10 @@ public interface Keys {
     public interface EndPointNews{
         public static final String KEY_SOURCES="sources";
         public static final String KEY_ARTICLES="articles";
+        public static final String KEY_NAME="name";
+        public static final String KEY_CATEGORY="category";
+        public static final String KEY_DESCRIPTION="description";
+        public static final String KEY_TITLE="title";
+        public static final String KEY_IMAGE="urlToImage";
     }
 }

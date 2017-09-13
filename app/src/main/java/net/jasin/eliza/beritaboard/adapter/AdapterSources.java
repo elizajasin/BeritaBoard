@@ -1,4 +1,4 @@
-package net.jasin.eliza.beritaboard;
+package net.jasin.eliza.beritaboard.adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -6,14 +6,14 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
+import net.jasin.eliza.beritaboard.information.NewsSources;
+import net.jasin.eliza.beritaboard.R;
+import net.jasin.eliza.beritaboard.activities.SourceList;
 import net.jasin.eliza.beritaboard.network.VolleySingleton;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 /**
  * Created by elizajasin on 12/09/2017.
@@ -24,8 +24,10 @@ public class AdapterSources extends RecyclerView.Adapter<AdapterSources.MyViewHo
     private VolleySingleton volleySingleton;
     private ArrayList<NewsSources> listSources = new ArrayList<>();
     private LayoutInflater inflater;
+    private Context context;
 
     public AdapterSources(Context context){
+        this.context = context;
         inflater = LayoutInflater.from(context);
         volleySingleton = VolleySingleton.getsInstance();
     }
@@ -55,24 +57,22 @@ public class AdapterSources extends RecyclerView.Adapter<AdapterSources.MyViewHo
         return listSources.size();
     }
 
-    class MyViewHolder extends RecyclerView.ViewHolder{
+    class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private TextView title;
         private TextView category;
         private TextView description;
 
         public MyViewHolder(View itemView) {
             super(itemView);
-//            itemView.setOnClickListener(this);
+            itemView.setOnClickListener(this);
             title = (TextView) itemView.findViewById(R.id.text_sources);
             category = (TextView) itemView.findViewById(R.id.text_category);
             description = (TextView) itemView.findViewById(R.id.text_desc);
         }
 
-//        @Override
-//        public void onClick(View view) {
-//
-//            view.getContext().startActivity(i);
-//            context.startActivity(new Intent(context, SourceList.class));
-//        }
+        @Override
+        public void onClick(View view) {
+            context.startActivity(new Intent(context, SourceList.class));
+        }
     }
 }
