@@ -47,7 +47,9 @@ public class SourceList extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_source_list);
-        
+
+        setTitle(getIntent().getStringExtra("name"));
+
         volleySingleton = VolleySingleton.getsInstance();
         requestQueue = volleySingleton.getRequestQueue();
 
@@ -87,10 +89,14 @@ public class SourceList extends AppCompatActivity {
                     JSONObject currentSource = arrayArticles.getJSONObject(i);
                     String title = currentSource.getString(KEY_TITLE);
                     String image = currentSource.getString(KEY_IMAGE);
+                    String urlArticle = currentSource.getString(KEY_URL);
+                    String source = getIntent().getStringExtra("name");
 
                     NewsArticles article = new NewsArticles();
                     article.setTitle(title);
                     article.setImage(image);
+                    article.setUrlArticle(urlArticle);
+                    article.setSource(source);
                     listMedia.add(article);
                 }
             } catch (JSONException e){

@@ -1,6 +1,7 @@
 package net.jasin.eliza.beritaboard.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +12,8 @@ import android.widget.TextView;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
 
+import net.jasin.eliza.beritaboard.activities.Article;
+import net.jasin.eliza.beritaboard.activities.SourceList;
 import net.jasin.eliza.beritaboard.information.NewsArticles;
 import net.jasin.eliza.beritaboard.R;
 import net.jasin.eliza.beritaboard.network.VolleySingleton;
@@ -26,8 +29,10 @@ public class AdapterArticles extends RecyclerView.Adapter<AdapterArticles.MyView
     private ImageLoader imageLoader;
     private ArrayList<NewsArticles> listArticles = new ArrayList<>();
     private LayoutInflater inflater;
+    private Context context;
 
     public AdapterArticles(Context context){
+        this.context = context;
         inflater = LayoutInflater.from(context);
         volleySingleton = VolleySingleton.getsInstance();
         imageLoader = volleySingleton.getImageLoader();
@@ -63,6 +68,8 @@ public class AdapterArticles extends RecyclerView.Adapter<AdapterArticles.MyView
                 }
             });
         }
+        holder.url = listArticles.get(position).getUrlArticle();
+        holder.source = listArticles.get(position).getSource();
     }
 
     @Override
@@ -70,22 +77,25 @@ public class AdapterArticles extends RecyclerView.Adapter<AdapterArticles.MyView
         return listArticles.size();
     }
 
-    class MyViewHolder extends RecyclerView.ViewHolder{
+    class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private TextView title;
         private ImageView image;
+        private String url;
+        private String source;
 
         public MyViewHolder(View itemView) {
             super(itemView);
-//            itemView.setOnClickListener(this);
+            itemView.setOnClickListener(this);
             title = (TextView) itemView.findViewById(R.id.text_article);
             image = (ImageView) itemView.findViewById(R.id.img_article);
         }
 
-//        @Override
-//        public void onClick(View view) {
-//
-//            view.getContext().startActivity(i);
-//            context.startActivity(new Intent(context, SourceList.class));
-//        }
+        @Override
+        public void onClick(View view) {
+            Intent intent = new Intent(context, Article.class);
+            intent.putExtra("url", url);
+            intent.putExtra("source", source);
+            context.startActivity(intent);
+        }
     }
 }

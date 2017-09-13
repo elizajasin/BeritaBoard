@@ -14,5 +14,6 @@ public interface Keys {
         public static final String KEY_DESCRIPTION="description";
         public static final String KEY_TITLE="title";
         public static final String KEY_IMAGE="urlToImage";
+        public static final String KEY_URL="url";
     }
 }

@@ -76,6 +76,7 @@ public class AdapterSources extends RecyclerView.Adapter<AdapterSources.MyViewHo
         public void onClick(View view) {
             Intent intent = new Intent(context, SourceList.class);
             intent.putExtra("id", id);
+            intent.putExtra("name", title.getText().toString());
             context.startActivity(intent);
         }
     }
