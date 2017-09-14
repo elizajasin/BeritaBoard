@@ -3,6 +3,7 @@ package net.jasin.eliza.beritaboard.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +21,8 @@ import net.jasin.eliza.beritaboard.network.VolleySingleton;
 
 import java.util.ArrayList;
 
+import static android.webkit.ConsoleMessage.MessageLevel.LOG;
+
 /**
  * Created by elizajasin on 13/09/2017.
  */
@@ -31,6 +34,8 @@ public class AdapterArticles extends RecyclerView.Adapter<AdapterArticles.MyView
     private LayoutInflater inflater;
     private Context context;
 
+    private final String TAG = "AdapterArticles";
+
     public AdapterArticles(Context context){
         this.context = context;
         inflater = LayoutInflater.from(context);
@@ -40,6 +45,7 @@ public class AdapterArticles extends RecyclerView.Adapter<AdapterArticles.MyView
 
     public void setListArticles(ArrayList<NewsArticles> listArticle){
         this.listArticles = listArticle;
+        Log.d(TAG, "Size : " + listArticles.size());
         notifyItemChanged(0, listArticles.size());
     }
 
@@ -53,6 +59,7 @@ public class AdapterArticles extends RecyclerView.Adapter<AdapterArticles.MyView
     @Override
     public void onBindViewHolder(final AdapterArticles.MyViewHolder holder, int position) {
         NewsArticles currentArticle = listArticles.get(position);
+        Log.d(TAG, "Position : " + listArticles.toString());
         holder.title.setText(currentArticle.getTitle());
         String urlImage = currentArticle.getImage();
         if(urlImage != null){

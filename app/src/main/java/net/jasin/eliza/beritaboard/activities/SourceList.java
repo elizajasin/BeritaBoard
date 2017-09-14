@@ -1,10 +1,12 @@
 package net.jasin.eliza.beritaboard.activities;
 
+import android.content.Intent;
 import android.net.ParseException;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
@@ -36,6 +38,7 @@ import static net.jasin.eliza.beritaboard.information.UrlEndPoints.*;
 public class SourceList extends AppCompatActivity {
     private RecyclerView recyclerView;
     private AdapterArticles adapterArticles;
+    private SearchView mnSearch;
 
     private final String TAG = "SourceList";
 
@@ -53,7 +56,7 @@ public class SourceList extends AppCompatActivity {
         volleySingleton = VolleySingleton.getsInstance();
         requestQueue = volleySingleton.getRequestQueue();
 
-        sendJsonRequest();
+        sendJsonRequest(getIntent().getStringExtra("query"));
 
         recyclerView = (RecyclerView) findViewById(R.id.recyclerv_articles);
         adapterArticles = new AdapterArticles(this);
@@ -61,12 +64,12 @@ public class SourceList extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
-    private void sendJsonRequest(){
+    private void sendJsonRequest(final String query){
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, getRequestUrl(getIntent().getStringExtra("id")), new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 Log.d(TAG, "Url : " + getRequestUrl(getIntent().getStringExtra("id")));
-                listArticles = parseJSONResponse(response);
+                listArticles = parseJSONResponse(response, query);
                 adapterArticles.setListArticles(listArticles);
                 Log.d(TAG, "List source : " + listArticles.toString());
                 Log.d(TAG, "Lenght source : " + listArticles.size());
@@ -80,24 +83,44 @@ public class SourceList extends AppCompatActivity {
         requestQueue.add(request);
     }
 
-    private ArrayList<NewsArticles> parseJSONResponse(JSONObject response){
+    private ArrayList<NewsArticles> parseJSONResponse(JSONObject response, String query){
         ArrayList<NewsArticles> listMedia = new ArrayList<>();
         if (response != null || response.length() > 0){
             try {
                 JSONArray arrayArticles = response.getJSONArray(KEY_ARTICLES);
-                for (int i = 0; i < arrayArticles.length(); i++){
-                    JSONObject currentSource = arrayArticles.getJSONObject(i);
-                    String title = currentSource.getString(KEY_TITLE);
-                    String image = currentSource.getString(KEY_IMAGE);
-                    String urlArticle = currentSource.getString(KEY_URL);
-                    String source = getIntent().getStringExtra("name");
+                if (query != ""){
+                    for (int i = 0; i < arrayArticles.length(); i++){
+                        JSONObject currentSource = arrayArticles.getJSONObject(i);
+                        String title = currentSource.getString(KEY_TITLE);
+                        String image = currentSource.getString(KEY_IMAGE);
+                        String urlArticle = currentSource.getString(KEY_URL);
+                        String source = getIntent().getStringExtra("name");
 
-                    NewsArticles article = new NewsArticles();
-                    article.setTitle(title);
-                    article.setImage(image);
-                    article.setUrlArticle(urlArticle);
-                    article.setSource(source);
-                    listMedia.add(article);
+                        NewsArticles article = new NewsArticles();
+                        article.setTitle(title);
+                        article.setImage(image);
+                        article.setUrlArticle(urlArticle);
+                        article.setSource(source);
+
+                        if (title.toUpperCase().contains(query.toUpperCase())) {
+                            listMedia.add(article);
+                        }
+                    }
+                } else {
+                    for (int i = 0; i < arrayArticles.length(); i++){
+                        JSONObject currentSource = arrayArticles.getJSONObject(i);
+                        String title = currentSource.getString(KEY_TITLE);
+                        String image = currentSource.getString(KEY_IMAGE);
+                        String urlArticle = currentSource.getString(KEY_URL);
+                        String source = getIntent().getStringExtra("name");
+
+                        NewsArticles article = new NewsArticles();
+                        article.setTitle(title);
+                        article.setImage(image);
+                        article.setUrlArticle(urlArticle);
+                        article.setSource(source);
+                        listMedia.add(article);
+                    }
                 }
             } catch (JSONException e){
 
@@ -115,6 +138,25 @@ public class SourceList extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
+
+        mnSearch = (SearchView) menu.findItem(R.id.action_search).getActionView();
+        mnSearch.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                Toast.makeText(getApplication(), "Searching" ,Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(SourceList.this, SourceList.class);
+                intent.putExtra("id", getIntent().getStringExtra("id"));
+                intent.putExtra("name", getIntent().getStringExtra("name"));
+                intent.putExtra("query", query);
+                startActivity(intent);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
         return true;
     }
 

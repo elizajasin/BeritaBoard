@@ -58,6 +58,8 @@ public class Article extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
+        MenuItem item = menu.findItem(R.id.action_search);
+        item.setVisible(false);
         return true;
     }
 
