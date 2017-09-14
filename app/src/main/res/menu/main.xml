@@ -21,6 +21,18 @@
         android:title="Popular"
         android:orderInCategory="3"/>
     <item
+        android:id="@+id/menu_en"
+        android:title="English"
+        android:orderInCategory="1"/>
+    <item
+        android:id="@+id/menu_de"
+        android:title="German"
+        android:orderInCategory="2"/>
+    <item
+        android:id="@+id/menu_fr"
+        android:title="France"
+        android:orderInCategory="3"/>
+    <item
         android:id="@+id/menu_about"
         android:title="About This App"
         android:orderInCategory="4"/>

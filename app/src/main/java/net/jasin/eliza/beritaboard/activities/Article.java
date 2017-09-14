@@ -58,8 +58,28 @@ public class Article extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
+
         MenuItem search = menu.findItem(R.id.action_search);
         search.setVisible(false);
+
+        MenuItem top = menu.findItem(R.id.menu_top);
+        top.setVisible(false);
+
+        MenuItem latest = menu.findItem(R.id.menu_latest);
+        latest.setVisible(false);
+
+        MenuItem popular = menu.findItem(R.id.menu_popular);
+        popular.setVisible(false);
+
+        MenuItem en = menu.findItem(R.id.menu_en);
+        en.setVisible(false);
+
+        MenuItem de = menu.findItem(R.id.menu_de);
+        de.setVisible(false);
+
+        MenuItem fr = menu.findItem(R.id.menu_fr);
+        fr.setVisible(false);
+
         return true;
     }
 

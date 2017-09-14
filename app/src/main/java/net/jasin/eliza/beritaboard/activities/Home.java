@@ -1,5 +1,6 @@
 package net.jasin.eliza.beritaboard.activities;
 
+import android.content.Intent;
 import android.net.ParseException;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -62,14 +63,18 @@ public class Home extends AppCompatActivity {
     }
 
     private void sendJsonRequest(){
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, getRequestUrl(), new Response.Listener<JSONObject>() {
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, getRequestUrl(getIntent().getStringExtra("lang")), new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                Log.d(TAG, "Url : " + getRequestUrl());
+                Log.d(TAG, "Url : " + getRequestUrl(getIntent().getStringExtra("lang")));
                 lisSources = parseJSONResponse(response);
                 adapterSources.setListSources(lisSources);
                 Log.d(TAG, "List source : " + lisSources.toString());
                 Log.d(TAG, "Lenght source : " + lisSources.size());
+                if (lisSources.size() == 0){
+                    Toast toast = Toast.makeText(Home.this, "Sources in this language is empty", Toast.LENGTH_SHORT);
+                    toast.show();
+                }
             }
         }, new Response.ErrorListener() {
             @Override
@@ -111,21 +116,47 @@ public class Home extends AppCompatActivity {
         return listMedia;
     }
 
-    public static String getRequestUrl(){
-        return URL_SOURCES+URL_CHAR_QUESTION+URL_PARAM_LANGUAGE+MyApplication.LANG+URL_CHAR_AMEPERSAND+URL_PARAM_API_KEY+MyApplication.API_KEY;
+    public static String getRequestUrl(String lang){
+        return URL_SOURCES+URL_CHAR_QUESTION+URL_PARAM_LANGUAGE+lang+URL_CHAR_AMEPERSAND+URL_PARAM_API_KEY+MyApplication.API_KEY;
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
+
         MenuItem search = menu.findItem(R.id.action_search);
         search.setVisible(false);
+
+        MenuItem top = menu.findItem(R.id.menu_top);
+        top.setVisible(false);
+
+        MenuItem latest = menu.findItem(R.id.menu_latest);
+        latest.setVisible(false);
+
+        MenuItem popular = menu.findItem(R.id.menu_popular);
+        popular.setVisible(false);
+
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
+        if (id == R.id.menu_en){
+            Intent intent = new Intent(Home.this, Home.class);
+            intent.putExtra("lang", "en");
+            startActivity(intent);
+        }
+        if (id == R.id.menu_de){
+            Intent intent = new Intent(Home.this, Home.class);
+            intent.putExtra("lang", "de");
+            startActivity(intent);
+        }
+        if (id == R.id.menu_fr){
+            Intent intent = new Intent(Home.this, Home.class);
+            intent.putExtra("lang", "fr");
+            startActivity(intent);
+        }
         if (id == R.id.menu_about){
             Toast toast = Toast.makeText(this, "Developed by\nEliza Riviera Rachmawati Jasin\neliza@jasin.net", Toast.LENGTH_SHORT);
             TextView v = (TextView) toast.getView().findViewById(android.R.id.message);

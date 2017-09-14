@@ -21,6 +21,7 @@ public class SplashScreen extends AppCompatActivity {
             @Override
             public void run() {
                 Intent mainIntent = new Intent(SplashScreen.this,Home.class);
+                mainIntent.putExtra("lang", "en");
                 SplashScreen.this.startActivity(mainIntent);
                 SplashScreen.this.finish();
             }

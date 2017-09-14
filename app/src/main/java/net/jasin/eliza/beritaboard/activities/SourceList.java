@@ -144,6 +144,15 @@ public class SourceList extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
 
+        MenuItem en = menu.findItem(R.id.menu_en);
+        en.setVisible(false);
+
+        MenuItem de = menu.findItem(R.id.menu_de);
+        de.setVisible(false);
+
+        MenuItem fr = menu.findItem(R.id.menu_fr);
+        fr.setVisible(false);
+
         mnSearch = (SearchView) menu.findItem(R.id.action_search).getActionView();
         mnSearch.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
