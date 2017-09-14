@@ -96,13 +96,11 @@ public class Home extends AppCompatActivity {
                     String id = currentSource.getString(KEY_ID);
                     String name = currentSource.getString(KEY_NAME);
                     String category = currentSource.getString(KEY_CATEGORY);
-                    String description = currentSource.getString(KEY_DESCRIPTION);
 
                     NewsSources sources = new NewsSources();
                     sources.setId(id);
                     sources.setName(name);
                     sources.setCategory(category);
-                    sources.setDescription(description);
                     listMedia.add(sources);
                 }
             } catch (JSONException e){

@@ -49,7 +49,6 @@ public class AdapterSources extends RecyclerView.Adapter<AdapterSources.MyViewHo
         NewsSources currentSource = listSources.get(position);
         holder.title.setText(currentSource.getName());
         holder.category.setText(currentSource.getCategory());
-        holder.description.setText(currentSource.getDescription());
         holder.id = listSources.get(position).getId();
     }
 
@@ -61,7 +60,6 @@ public class AdapterSources extends RecyclerView.Adapter<AdapterSources.MyViewHo
     class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private TextView title;
         private TextView category;
-        private TextView description;
         private String id;
 
         public MyViewHolder(View itemView) {
@@ -69,7 +67,6 @@ public class AdapterSources extends RecyclerView.Adapter<AdapterSources.MyViewHo
             itemView.setOnClickListener(this);
             title = (TextView) itemView.findViewById(R.id.text_sources);
             category = (TextView) itemView.findViewById(R.id.text_category);
-            description = (TextView) itemView.findViewById(R.id.text_desc);
         }
 
         @Override

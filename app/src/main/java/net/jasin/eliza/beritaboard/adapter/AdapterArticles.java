@@ -77,6 +77,10 @@ public class AdapterArticles extends RecyclerView.Adapter<AdapterArticles.MyView
         }
         holder.url = listArticles.get(position).getUrlArticle();
         holder.source = listArticles.get(position).getSource();
+
+        String tgl = listArticles.get(position).getDate();
+        String wkt = listArticles.get(position).getTime();
+        holder.date.setText("Published at : "+tgl+" "+wkt);
     }
 
     @Override
@@ -87,6 +91,7 @@ public class AdapterArticles extends RecyclerView.Adapter<AdapterArticles.MyView
     class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private TextView title;
         private ImageView image;
+        private TextView date;
         private String url;
         private String source;
 
@@ -94,6 +99,7 @@ public class AdapterArticles extends RecyclerView.Adapter<AdapterArticles.MyView
             super(itemView);
             itemView.setOnClickListener(this);
             title = (TextView) itemView.findViewById(R.id.text_article);
+            date = (TextView) itemView.findViewById(R.id.text_date);
             image = (ImageView) itemView.findViewById(R.id.img_article);
         }
 

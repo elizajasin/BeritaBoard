@@ -9,16 +9,14 @@ public class NewsSources {
     private String id;
     private String name;
     private String category;
-    private String description;
 
     public NewsSources(){
 
     }
 
-    public NewsSources(String id, String title, String category, String description){
+    public NewsSources(String id, String title, String category){
         this.name = title;
         this.category = category;
-        this.description = description;
     }
 
     public String getId() {
@@ -37,10 +35,6 @@ public class NewsSources {
         this.category = category;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     public String getName() {
 
         return name;
@@ -50,7 +44,4 @@ public class NewsSources {
         return category;
     }
 
-    public String getDescription() {
-        return description;
-    }
 }

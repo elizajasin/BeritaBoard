@@ -32,7 +32,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.StringTokenizer;
+import java.util.regex.*;
+import java.util.Date;
 
 import static net.jasin.eliza.beritaboard.information.Keys.EndPointNews.*;
 import static net.jasin.eliza.beritaboard.information.UrlEndPoints.*;
@@ -98,12 +102,19 @@ public class SourceList extends AppCompatActivity {
                         String image = currentSource.getString(KEY_IMAGE);
                         String urlArticle = currentSource.getString(KEY_URL);
                         String source = getIntent().getStringExtra("name");
+                        String publishAt = currentSource.getString(KEY_DATE);
+                        String[] split1 = publishAt.split("T");
+                        String[] split2 = split1[1].split("Z");
+                        String date = split1[0];
+                        String time = split2[0];
 
                         NewsArticles article = new NewsArticles();
                         article.setTitle(title);
                         article.setImage(image);
                         article.setUrlArticle(urlArticle);
                         article.setSource(source);
+                        article.setDate(date);
+                        article.setTime(time);
 
                         if (title.toUpperCase().contains(query.toUpperCase())) {
                             listMedia.add(article);
@@ -116,13 +127,19 @@ public class SourceList extends AppCompatActivity {
                         String image = currentSource.getString(KEY_IMAGE);
                         String urlArticle = currentSource.getString(KEY_URL);
                         String source = getIntent().getStringExtra("name");
+                        String publishAt = currentSource.getString(KEY_DATE);
+                        String[] split1 = publishAt.split("T");
+                        String[] split2 = split1[1].split("Z");
+                        String date = split1[0];
+                        String time = split2[0];
 
                         NewsArticles article = new NewsArticles();
                         article.setTitle(title);
                         article.setImage(image);
                         article.setUrlArticle(urlArticle);
                         article.setSource(source);
-                        listMedia.add(article);
+                        article.setDate(date);
+                        article.setTime(time);
                     }
                 }
             } catch (JSONException e){
