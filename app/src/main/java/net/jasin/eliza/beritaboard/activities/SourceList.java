@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -30,6 +31,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
 import static net.jasin.eliza.beritaboard.information.Keys.EndPointNews.*;
@@ -65,10 +67,10 @@ public class SourceList extends AppCompatActivity {
     }
 
     private void sendJsonRequest(final String query){
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, getRequestUrl(getIntent().getStringExtra("id")), new Response.Listener<JSONObject>() {
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, getRequestUrl(getIntent().getStringExtra("id"),getIntent().getStringExtra("sort")), new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                Log.d(TAG, "Url : " + getRequestUrl(getIntent().getStringExtra("id")));
+                Log.d(TAG, "Url : " + getRequestUrl(getIntent().getStringExtra("id"),getIntent().getStringExtra("sort")));
                 listArticles = parseJSONResponse(response, query);
                 adapterArticles.setListArticles(listArticles);
                 Log.d(TAG, "List source : " + listArticles.toString());
@@ -77,7 +79,8 @@ public class SourceList extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
+                Toast toast = Toast.makeText(SourceList.this, "The news source you've selected from "+ getIntent().getStringExtra("name") + " isn't available sorted by " + getIntent().getStringExtra("sort"), Toast.LENGTH_LONG);
+                toast.show();
             }
         });
         requestQueue.add(request);
@@ -123,16 +126,18 @@ public class SourceList extends AppCompatActivity {
                     }
                 }
             } catch (JSONException e){
-
+                Toast toast = Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT);
+                toast.show();
             } catch (ParseException e){
-
+                Toast toast = Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT);
+                toast.show();
             }
         }
         return listMedia;
     }
 
-    public static String getRequestUrl(String id){
-        return URL_ARTICLES+URL_CHAR_QUESTION+URL_PARAM_SOURCE+id+URL_CHAR_AMEPERSAND+URL_PARAM_SORT_BY+MyApplication.LATEST+URL_CHAR_AMEPERSAND+URL_PARAM_API_KEY+MyApplication.API_KEY;
+    public static String getRequestUrl(String id, String sort){
+        return URL_ARTICLES+URL_CHAR_QUESTION+URL_PARAM_SOURCE+id+URL_CHAR_AMEPERSAND+URL_PARAM_SORT_BY+sort+URL_CHAR_AMEPERSAND+URL_PARAM_API_KEY+MyApplication.API_KEY;
     }
 
     @Override
@@ -143,11 +148,11 @@ public class SourceList extends AppCompatActivity {
         mnSearch.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                Toast.makeText(getApplication(), "Searching" ,Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(SourceList.this, SourceList.class);
                 intent.putExtra("id", getIntent().getStringExtra("id"));
                 intent.putExtra("name", getIntent().getStringExtra("name"));
                 intent.putExtra("query", query);
+                intent.putExtra("sort", getIntent().getStringExtra("sort"));
                 startActivity(intent);
                 return false;
             }
@@ -163,6 +168,30 @@ public class SourceList extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
+        if (id == R.id.menu_top){
+            Intent intent = new Intent(SourceList.this, SourceList.class);
+            intent.putExtra("id", getIntent().getStringExtra("id"));
+            intent.putExtra("name", getIntent().getStringExtra("name"));
+            intent.putExtra("query", getIntent().getStringExtra("query"));
+            intent.putExtra("sort", "top");
+            startActivity(intent);
+        }
+        if (id == R.id.menu_latest){
+            Intent intent = new Intent(SourceList.this, SourceList.class);
+            intent.putExtra("id", getIntent().getStringExtra("id"));
+            intent.putExtra("name", getIntent().getStringExtra("name"));
+            intent.putExtra("query", getIntent().getStringExtra("query"));
+            intent.putExtra("sort", "latest");
+            startActivity(intent);
+        }
+        if (id == R.id.menu_popular){
+            Intent intent = new Intent(SourceList.this, SourceList.class);
+            intent.putExtra("id", getIntent().getStringExtra("id"));
+            intent.putExtra("name", getIntent().getStringExtra("name"));
+            intent.putExtra("query", getIntent().getStringExtra("query"));
+            intent.putExtra("sort", "popular");
+            startActivity(intent);
+        }
         if (id == R.id.menu_about){
             Toast toast = Toast.makeText(this, "Developed by\nEliza Riviera Rachmawati Jasin\neliza@jasin.net", Toast.LENGTH_SHORT);
             TextView v = (TextView) toast.getView().findViewById(android.R.id.message);

@@ -9,7 +9,19 @@
         app:actionViewClass="android.support.v7.widget.SearchView"
         android:title="Search"/>
     <item
+        android:id="@+id/menu_top"
+        android:title="Top"
+        android:orderInCategory="1"/>
+    <item
+        android:id="@+id/menu_latest"
+        android:title="Latest"
+        android:orderInCategory="2"/>
+    <item
+        android:id="@+id/menu_popular"
+        android:title="Popular"
+        android:orderInCategory="3"/>
+    <item
         android:id="@+id/menu_about"
         android:title="About This App"
-        android:orderInCategory="1"/>
+        android:orderInCategory="4"/>
 </menu>

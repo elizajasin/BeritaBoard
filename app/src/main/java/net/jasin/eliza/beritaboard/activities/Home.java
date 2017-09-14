@@ -74,7 +74,8 @@ public class Home extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
+                Toast toast = Toast.makeText(Home.this, error.getMessage(), Toast.LENGTH_SHORT);
+                toast.show();
             }
         });
         requestQueue.add(request);
@@ -100,9 +101,11 @@ public class Home extends AppCompatActivity {
                     listMedia.add(sources);
                 }
             } catch (JSONException e){
-
+                Toast toast = Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT);
+                toast.show();
             } catch (ParseException e){
-
+                Toast toast = Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT);
+                toast.show();
             }
         }
         return listMedia;
@@ -115,8 +118,8 @@ public class Home extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
-        MenuItem item = menu.findItem(R.id.action_search);
-        item.setVisible(false);
+        MenuItem search = menu.findItem(R.id.action_search);
+        search.setVisible(false);
         return true;
     }
 

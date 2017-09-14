@@ -78,6 +78,7 @@ public class AdapterSources extends RecyclerView.Adapter<AdapterSources.MyViewHo
             intent.putExtra("id", id);
             intent.putExtra("name", title.getText().toString());
             intent.putExtra("query", "");
+            intent.putExtra("sort", "latest");
             context.startActivity(intent);
         }
     }
