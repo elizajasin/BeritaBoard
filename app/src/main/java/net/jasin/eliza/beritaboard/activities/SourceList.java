@@ -14,7 +14,6 @@ import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -31,12 +30,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.UnsupportedEncodingException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.StringTokenizer;
-import java.util.regex.*;
-import java.util.Date;
 
 import static net.jasin.eliza.beritaboard.information.Keys.EndPointNews.*;
 import static net.jasin.eliza.beritaboard.information.UrlEndPoints.*;
